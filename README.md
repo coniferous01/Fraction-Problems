@@ -1,2 +1,2 @@
 # Fraction-Problems
-program to generate fraction problems for students
+Generate fraction problems for students
