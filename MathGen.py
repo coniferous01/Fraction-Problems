@@ -1,37 +1,40 @@
-# The goal of this is to create a program that generats math problems with varying types of challenges.
-# I want to create a way to generate problems where the answers HAVE to be simplified.
-# Done - I want to create a way to randomly add in problems that have A SINGLE whole number (so students practice making whole numbers fractions).
-# I want to control whether the fractions will include impropper fractions.
-# I want to control how many common factors an answer will have (how many times a student needs to simplify their answer).
-# I want to be able to make one or multiple values negative
-# I need to make sure that the fractions generated don't repeat
+# TODO: The goal of this is to create a program that generats math problems with varying types of challenges.
+# TODO: I want to create a way to generate problems where the answers HAVE to be simplified.
+# Done - I want to create a way to add in random problems that have A SINGLE whole number (so students practice making whole numbers fractions).
+# TODO: I want to control whether the fractions will include impropper fractions.
+# TODO: I want to control how many common factors an answer will have (how many times a student needs to simplify their answer).
+# TODO: I want to be able to make one or multiple values negative
+# TODO: I need to make sure that the fractions generated don't repeat
 
 import random
 
 primes = [2, 3, 5, 7, 11, 13, 17, 23]
 
-times = int(input('How many problems do you want? \n'))
+try:
+    times = int(input('How many problems do you want? \n'))
+except ValueError:
+    times = input('Please try entering a number again. \n')
 
-def properf():
+def proper_fraction():
     """Generate a proper fraction that can't be simplified"""
+    # Can this code be simplified?
     denom = random.randint(1, 20)
     if denom == 1:
-        num = random.randint(1, 20)
+        numer = random.randint(1, 20)
     else: 
-        num = random.randint(1, denom-1)
-    n = 1
-    while n > 0:
-        n -= 1
-        for i in primes:
-            if denom%i == 0 and num%i == 0:
-                n += 1
-                num = random.randint(1, denom-1)
-    return(str(num) + "/" + str(denom))
+        numer = random.randint(1, denom-1)
+    for i in primes:
+        while denom%i == 0 and numer%i == 0:
+            if denom == 1:
+                numer = random.randint(1, 20)
+            else: 
+                numer = random.randint(1, denom-1)
+    return(str(numer) + "/" + str(denom))
 
-def GenQUnDenom():
+def uncommon_denom_question():
     """Generate an equation with two proper fractions that have different denominators"""
-    f1 = properf()
-    f2 = properf()
+    f1 = proper_fraction()
+    f2 = proper_fraction()
     operations = [' + ', ' - ', ' x ', ' ÷ ']
     op = operations[random.randint(0,len(operations)-1)]
     if f1.split("/")[1] == '1':
@@ -39,11 +42,11 @@ def GenQUnDenom():
     if f2.split("/")[1] == '1':
         f2 = f2.split("/")[0]
     while len(f1.split("/")) < 2 and len(f2.split("/")) < 2:
-        f2 = properf()
+        f2 = proper_fraction()
     if op == ' ÷ ':
         try:
             while f1.split("/")[1] == f2.split("/")[0]:
-                f2 = properf()
+                f2 = proper_fraction()
                 if f2.split("/")[1] == '1':
                     f2 = f2.split("/")[0]
             return((f1 + op + f2 + '\n'))
@@ -52,10 +55,7 @@ def GenQUnDenom():
     else:
         try:
             while f1.split("/")[1] == f2.split("/")[1]:
-                f2 = properf()
+                f2 = proper_fraction()
             return((f1 + op + f2 + '\n'))
         except IndexError:
             return((f1 + op + f2 + '\n'))
-
-for i in range(times):
-    print(GenQUnDenom())
