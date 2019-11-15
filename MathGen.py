@@ -10,10 +10,15 @@ import random
 
 primes = [2, 3, 5, 7, 11, 13, 17, 23]
 
-try:
-    times = int(input('How many problems do you want? \n'))
-except ValueError:
-    times = input('Please try entering a number again. \n')
+times = input('How many problems do you want? \n')
+while True:
+    try:
+        itimes = int(times)
+    except ValueError:
+        times = input('Please try entering a number again. \n')
+        continue
+    else:
+        break
 
 def proper_fraction():
     """Generate a proper fraction that can't be simplified"""
@@ -59,3 +64,6 @@ def uncommon_denom_question():
             return((f1 + op + f2 + '\n'))
         except IndexError:
             return((f1 + op + f2 + '\n'))
+
+for i in range(itimes):
+    print(uncommon_denom_question())
