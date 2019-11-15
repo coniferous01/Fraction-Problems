@@ -20,10 +20,21 @@ while True:
     else:
         break
 
+whole = input('Do you want any problems with whole numbers? Type "yes" or "no" \n')
+while True:
+    if whole == 'yes' or whole == 'no':
+        break
+    else:
+        whole = input('Please try again. \n Do you want any problems with whole numbers? Type "yes" or "no" \n')
+        continue
+
 def proper_fraction():
     """Generate a proper fraction that can't be simplified"""
     # Can this code be simplified?
-    denom = random.randint(1, 20)
+    if whole == 'yes':
+        denom = random.randint(1, 20)
+    else:
+        denom = random.randint(2, 20)
     if denom == 1:
         numer = random.randint(1, 20)
     else: 
