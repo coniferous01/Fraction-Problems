@@ -98,10 +98,17 @@ negative_problems = l_problems[:negative_number]
 positive_problems = l_problems[negative_number:]
 
 for problem in negative_problems:
-    split_problem = '(-' + problem.split()[0] + ')'
-    n_problem = split_problem + ' ' + problem.split()[1] + ' ' + problem.split()[2] + ' \n'
-    r_place = random.randint(0, len(l_problems))
-    positive_problems.insert(r_place, n_problem)
+    if 0.5 >= random.random():
+        split_problem = '(-' + problem.split()[0] + ')'
+        n_problem = split_problem + ' ' + problem.split()[1] + ' ' + problem.split()[2] + ' \n'
+        r_place = random.randint(0, len(l_problems))
+        positive_problems.insert(r_place, n_problem)
+    else:
+        split_problem = '(-' + problem.split()[-1] + ')'
+        n_problem = problem.split()[0] + ' ' + problem.split()[1] + ' ' + split_problem + ' \n'
+        r_place = random.randint(0, len(l_problems))
+        positive_problems.insert(r_place, n_problem)
 
 print(positive_problems)
 
+#Done - Next task is to change code so that either term will be negative (not just the first one)
