@@ -6,7 +6,6 @@
 # TODO: I need to make sure that the fractions generated don't repeat
 
 import random
-from numpy.random import choice
 
 primes = [2, 3, 5, 7, 11, 13, 17, 23]
 
@@ -109,6 +108,5 @@ for problem in negative_problems:
         r_place = random.randint(0, len(l_problems))
         positive_problems.insert(r_place, n_problem)
 
-print(positive_problems)
-
-#Done - Next task is to change code so that either term will be negative (not just the first one)
+for i in positive_problems:
+    print(i)
