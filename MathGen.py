@@ -15,7 +15,7 @@ times = input('How many problems do you want? \n')
 negative = input('What percentage of the problems do you want to have negative numbers? Enter a number 0 - 100.\n')
 while True:
     try:
-        negative_i = float(negative)/100
+        negative_float = float(negative)/100
     except ValueError:
         negative = input('Please try entering a percentage again. \n')
         continue
@@ -24,7 +24,7 @@ while True:
 
 while True:
     try:
-        itimes = int(times)
+        i_times = int(times)
     except ValueError:
         times = input('Please try entering a number again. \n')
         continue
@@ -41,7 +41,7 @@ while True:
 
 def proper_fraction():
     """Generate a proper fraction that can't be simplified"""
-    # Can this code be simplified?
+    # NTS - Can this code be simplified?
     if whole == 'yes':
         denom = random.randint(1, 20)
     else:
@@ -64,21 +64,11 @@ def uncommon_denom_question():
     f2 = proper_fraction()
     operations = [' + ', ' - ', ' x ', ' ÷ ']
     op = operations[random.randint(0,len(operations)-1)]
-    r = random.random()
-    print(r)
+    #r = random.random()
     if f1.split("/")[1] == '1':
         f1 = f1.split("/")[0]
     if f2.split("/")[1] == '1':
         f2 = f2.split("/")[0]
-    if negative_i >= r:
-        if r >= 0.5:
-            f1a = '(-' + f1.split("/")[0] + ')'
-            f1b = f1.split("/")[1]
-            f1 = f1a + '/' + f1b
-        else:
-            f2a = '(-' + f2.split("/")[0] + ')'
-            f2b = f2.split("/")[1]
-            f2 = f2a + '/' + f2b  
     while len(f1.split("/")) < 2 and len(f2.split("/")) < 2:
         f2 = proper_fraction()
     if op == ' ÷ ':
@@ -86,49 +76,32 @@ def uncommon_denom_question():
             while f1.split("/")[1] == f2.split("/")[0]:
                 f2 = proper_fraction()
                 if f2.split("/")[1] == '1':
-                    f2 = f2.split("/")[0]
-                if negative_i >= r:
-                    if r >= 0.5:
-                        f1a = '(-' + f1.split("/")[0] + ')'
-                        f1b = f1.split("/")[1]
-                        f1 = f1a + '/' + f1b
-                    else:
-                        f2a = '(-' + f2.split("/")[0] + ')'
-                        f2b = f2.split("/")[1]
-                        f2 = f2a + '/' + f2b            
-                return((f1 + op + f2 + '\n'))
+                    f2 = f2.split("/")[0]         
+            return((f1 + op + f2 + ' \n'))
         except IndexError:
-            #if negative_i >= r:
-                #if random.random() >= 0.5:
-                    #f1 = '/'.join('(-' + f1.split("/")[0] + ')', f1.split("/"[1]))
-                #else:
-                    #f2 = '/'.join('(-' + f2.split("/")[0] + ')', f2.split("/"[1]))
-            return((f1 + op + f2 + '\n'))
+            return((f1 + op + f2 + ' \n'))
     else:
         try:
             while f1.split("/")[1] == f2.split("/")[1]:
-                f2 = proper_fraction()
-                if negative_i >= r:
-                    if r >= 0.5:
-                        f1a = '(-' + f1.split("/")[0] + ')'
-                        print(f1a)
-                        f1b = f1.split("/")[1]
-                        print(f1b)
-                        f1 = f1a + '/' + f1b
-                        print(f1)
-                    else:
-                        f2a = '(-' + f2.split("/")[0] + ')'
-                        f2b = f2.split("/")[1]
-                        f2 = f2a + '/' + f2b            
-                return((f1 + op + f2 + '\n'))
-            return((f1 + op + f2 + '\n'))
+                f2 = proper_fraction()         
+            return((f1 + op + f2 + ' \n'))
         except IndexError:
-            return((f1 + op + f2 + '\n'))
+            return((f1 + op + f2 + ' \n'))
 
 l_problems = []
 
-for i in range(itimes):
+for i in range(i_times):
     l_problems.append(uncommon_denom_question())
 
-for i in l_problems:
-    print(i)
+negative_number = int(negative_float*i_times)
+negative_problems = l_problems[:negative_number]
+positive_problems = l_problems[negative_number:]
+
+for problem in negative_problems:
+    split_problem = '(-' + problem.split()[0] + ')'
+    n_problem = split_problem + ' ' + problem.split()[1] + ' ' + problem.split()[2] + ' \n'
+    r_place = random.randint(0, len(l_problems))
+    positive_problems.insert(r_place, n_problem)
+
+print(positive_problems)
+
