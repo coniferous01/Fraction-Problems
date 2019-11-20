@@ -1,4 +1,4 @@
-# TODO: The goal of this is to create a program that generats math problems with varying types of challenges.
+# TODO: The goal of this is to create a program that generates math problems with varying types of challenges.
 # TODO: I want to create a way to generate problems where the answers HAVE to be simplified.
 # TODO: I want to control whether the fractions will include improper fractions.
 # TODO: I want to control how many common factors an answer will have (how many times a student needs to simplify their answer).
@@ -33,7 +33,7 @@ while True:
 
 whole = input('Do you want any problems with whole numbers? Type "yes" or "no" \n')
 while True:
-    if whole == 'yes' or whole == 'no':
+    if whole.lower() == 'yes' or whole.lower() == 'no':
         break
     else:
         whole = input('Please try again. \n Do you want any problems with whole numbers? Type "yes" or "no" \n')
