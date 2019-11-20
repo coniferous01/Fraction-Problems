@@ -2,7 +2,6 @@
 # TODO: I want to create a way to generate problems where the answers HAVE to be simplified.
 # TODO: I want to control whether the fractions will include improper fractions.
 # TODO: I want to control how many common factors an answer will have (how many times a student needs to simplify their answer).
-# TODO: I want to be able to make one or multiple values negative
 # TODO: I need to make sure that the fractions generated don't repeat
 
 import random
