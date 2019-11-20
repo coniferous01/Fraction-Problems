@@ -3,12 +3,21 @@
 # TODO: I want to control whether the fractions will include improper fractions.
 # TODO: I want to control how many common factors an answer will have (how many times a student needs to simplify their answer).
 # TODO: I need to make sure that the fractions generated don't repeat
+# PROBLEM: I'm generating fractions that can be simplified...
 
 import random
 
 primes = [2, 3, 5, 7, 11, 13, 17, 23]
 
 times = input('How many problems do you want? \n')
+while True:
+    try:
+        i_times = int(times)
+    except ValueError:
+        times = input('Please try entering a number again. \n')
+        continue
+    else:
+        break
 
 negative = input('What percentage of the problems do you want to have negative numbers? Enter a number 0 - 100.\n')
 while True:
@@ -16,15 +25,6 @@ while True:
         negative_float = float(negative)/100
     except ValueError:
         negative = input('Please try entering a percentage again. \n')
-        continue
-    else:
-        break
-
-while True:
-    try:
-        i_times = int(times)
-    except ValueError:
-        times = input('Please try entering a number again. \n')
         continue
     else:
         break
@@ -54,6 +54,7 @@ def proper_fraction():
                 numer = random.randint(1, 20)
             else: 
                 numer = random.randint(1, denom-1)
+            continue
     return(str(numer) + "/" + str(denom))
 
 def uncommon_denom_question():
@@ -62,7 +63,6 @@ def uncommon_denom_question():
     f2 = proper_fraction()
     operations = [' + ', ' - ', ' x ', ' ÷ ']
     op = operations[random.randint(0,len(operations)-1)]
-    #r = random.random()
     if f1.split("/")[1] == '1':
         f1 = f1.split("/")[0]
     if f2.split("/")[1] == '1':
